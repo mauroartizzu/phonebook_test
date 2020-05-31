@@ -14,7 +14,7 @@ class SearchPhonebookAction extends PhonebookAction
     protected function action(): Response
     {
         $phone = (string) $this->resolveArg('phone');
-        // $record = new Phonebook(null, 'Mario', 'Rossi', '123456')
+        
         $record = $this->phonebookRepository->findByPhone($phone);
 
         return $this->respondWithData([
