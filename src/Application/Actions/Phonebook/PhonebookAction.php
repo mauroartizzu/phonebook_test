@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Application\Actions\Phonebook;
 
 use App\Application\Actions\Action;
-//use App\Domain\Phonebook\PhonebookRepository;
+use App\Domain\Phonebook\PhonebookRepository;
 use Psr\Log\LoggerInterface;
 
 abstract class PhonebookAction extends Action
@@ -18,9 +18,9 @@ abstract class PhonebookAction extends Action
      * @param LoggerInterface $logger
      * @param PhonebookRepository  $phonebookRepository
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, PhonebookRepository $phonebookRepository)
     {
         parent::__construct($logger);
-        //$this->phonebookRepository = $phonebookRepository;
+        $this->phonebookRepository = $phonebookRepository;
     }
 }

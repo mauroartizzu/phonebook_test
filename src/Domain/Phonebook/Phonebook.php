@@ -1,21 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Domain\Phonebook;
 
 use JsonSerializable;
 
-class User implements JsonSerializable
+class Phonebook implements JsonSerializable
 {
     /**
      * @var int|null
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $username;
 
     /**
      * @var string
@@ -28,17 +23,22 @@ class User implements JsonSerializable
     private $lastName;
 
     /**
+     * @var string
+     */
+    private $phone;
+
+    /**
      * @param int|null  $id
-     * @param string    $username
      * @param string    $firstName
      * @param string    $lastName
+     * @param string    $phone
      */
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
+    public function __construct(?int $id, string $firstName, string $lastName, string $phone)
     {
         $this->id = $id;
-        $this->username = strtolower($username);
         $this->firstName = ucfirst($firstName);
         $this->lastName = ucfirst($lastName);
+        $this->phone = $phone;
     }
 
     /**
@@ -47,14 +47,6 @@ class User implements JsonSerializable
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
     }
 
     /**
@@ -74,15 +66,23 @@ class User implements JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
      * @return array
      */
     public function jsonSerialize()
     {
         return [
             'id' => $this->id,
-            'username' => $this->username,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
+            'phone' => $this->phone,
         ];
     }
 }
