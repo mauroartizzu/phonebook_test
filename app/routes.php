@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Application\Actions\Phonebook\GeneratePhonebookAction;
+use App\Application\Actions\Phonebook\SearchPhonebookAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -13,7 +14,9 @@ return function (App $app) {
         return $response;
     });
 
-    $app->group('/', function (Group $group) {
-        $group->get('generate', GeneratePhonebookAction::class);
+    $app->group('/phonebook', function (Group $group) {
+        $group->get('/generate', GeneratePhonebookAction::class);
+        $group->get('/search/{phone}', SearchPhonebookAction::class);
     });
+
 };
